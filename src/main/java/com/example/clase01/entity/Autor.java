@@ -8,27 +8,30 @@ import jakarta.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper=false)
-@Builder
-@AllArgsConstructor
+@Getter @Setter
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Builder(toBuilder = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="TBL_AUTORES")
+@Table(name = "TBL_AUTORES")
 public class Autor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_AUTOR")
+    @SequenceGenerator(name = "SEQ_AUTOR", sequenceName = "SEQ_AUTOR", allocationSize = 1)
     @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
-    @NotNull(message = "El nombre no puede ser nulo")
+
     @NotBlank(message = "El nombre no puede estar en blanco")
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombres;
-    @NotBlank
-    @Column(name = "APELLIDOS", nullable = false, length = 120)
+
+    @NotBlank(message = "El apellido no puede estar en blanco")
+    @Column(name = "APELLIDOS", nullable = false, length = 100)
     private String apellidos;
 
-    @NotBlank
+    @NotBlank(message = "El pais no puede estar en blanco")
     @Column(name = "PAIS", nullable = false, length = 60)
     private String pais;
 

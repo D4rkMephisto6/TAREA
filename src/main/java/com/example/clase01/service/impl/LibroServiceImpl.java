@@ -1,18 +1,19 @@
-package com.example.clase01.service;
+package com.example.clase01.service.impl;
 
 import com.example.clase01.entity.Libro;
-import com.example.clase01.repository.LibroRepositorio;
+import com.example.clase01.repository.LibroRepository;
+import com.example.clase01.service.service.LibroService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LibroServiceImpl implements LibroService{
-    private final LibroRepositorio repository;
+public class LibroServiceImpl implements LibroService {
+    private final LibroRepository repository;
 
 
-    public LibroServiceImpl(LibroRepositorio repository) {
+    public LibroServiceImpl(LibroRepository repository) {
         this.repository = repository;
     }
     @Override

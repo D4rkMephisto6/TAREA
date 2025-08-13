@@ -18,7 +18,8 @@ import java.util.Set;
 @Table(name="TBL_LIBROS")
 public class Libro {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LIBRO")
+    @SequenceGenerator(name = "SEQ_LIBRO", sequenceName = "SEQ_LIBRO", allocationSize = 1)
     @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
     @NotBlank

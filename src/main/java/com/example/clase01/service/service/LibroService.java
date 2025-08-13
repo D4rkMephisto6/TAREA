@@ -1,4 +1,4 @@
-package com.example.clase01.service;
+package com.example.clase01.service.service;
 
 import com.example.clase01.entity.Libro;
 

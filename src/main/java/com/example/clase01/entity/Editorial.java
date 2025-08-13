@@ -18,7 +18,8 @@ import java.util.Set;
 @Table(name="TBL_EDITORIALES")
 public class Editorial {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_EDITORIAL")
+    @SequenceGenerator(name = "SEQ_EDITORIAL", sequenceName = "SEQ_EDITORIAL", allocationSize = 1)
     @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
     @NotNull(message = "El nombre no puede ser nulo")

@@ -10,11 +10,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/libros")
-public class LibroController {
+@RequestMapping("/api/autores")
+public class AutorController {
 
     private final LibroService libroService;
-    public LibroController(LibroService libroService) {
+    public AutorController(LibroService libroService) {
         this.libroService = libroService;
     }
 

@@ -1,5 +1,7 @@
 package com.example.clase01.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -17,7 +19,8 @@ import java.util.Set;
 @Table(name="TBL_CATEGORIAS")
 public class Categoria {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CATEGORIA")
+    @SequenceGenerator(name="SEQ_CATEGORIA", sequenceName="SEQ_CATEGORIA", allocationSize=1)
     @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
     @NotNull(message = "El nombre no puede ser nulo")
@@ -29,6 +32,6 @@ public class Categoria {
     private Character estado= 'A';
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "categoria")
-    @JsonIgnore
+    @JsonManagedReference
     private Set<Seccion> secciones = new HashSet<>();
 }
