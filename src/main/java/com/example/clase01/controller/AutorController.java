@@ -1,6 +1,8 @@
 package com.example.clase01.controller;
 
+import com.example.clase01.entity.Autor;
 import com.example.clase01.entity.Libro;
+import com.example.clase01.service.service.AutorService;
 import com.example.clase01.service.service.LibroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,36 +15,36 @@ import java.util.List;
 @RequestMapping("/api/autores")
 public class AutorController {
 
-    private final LibroService libroService;
-    public AutorController(LibroService libroService) {
-        this.libroService = libroService;
+    private final AutorService service;
+    public AutorController(AutorService service) {
+        this.service = service;
     }
 
     @GetMapping
-    public List<Libro> getLibros() {
-        return libroService.getLibros();
+    public List<Autor> getLibros() {
+        return service.getAutors();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Libro> obtenerPorId(@PathVariable Long id) {
-        return libroService.getLibro(id)
+    public ResponseEntity<Autor> obtenerPorId(@PathVariable Long id) {
+        return service.getAutor(id)
                 .map(ResponseEntity::ok)
-                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Libro " + id + " no existe"));
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor " + id + " no existe"));
     }
 
     @PostMapping
-    public ResponseEntity<Libro> crear(@RequestBody Libro libro) {
-        return ResponseEntity.ok(libroService.create(libro));
+    public ResponseEntity<Autor> crear(@RequestBody Autor autor) {
+        return ResponseEntity.ok(service.create(autor));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Libro> actualizar(@PathVariable Long id, @RequestBody Libro libro) {
-        return ResponseEntity.ok(libroService.update(id,libro));
+    public ResponseEntity<Autor> actualizar(@PathVariable Long id, @RequestBody Autor autor) {
+        return ResponseEntity.ok(service.update(id,autor));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        libroService.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
